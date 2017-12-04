@@ -12,11 +12,30 @@ class Pixel
 
 
   def initialize(red, green, blue, x, y)
+    colors =[red,blue,green]
+    colors.map! do |color|
+      if(color < 0)
+        color = 0
+      elsif(color > 255)
+        color = 255
+      end
+      color
+    end
+    self.red = colors[0]
+    self.blue = colors[1]
+    self.green = colors[2]
+    self.x = x
+    self.y = y
   end
 
   private
 
   def validate_color(color)
+    if(color < 0)
+      color = 0
+    elsif(color > 255)
+      color = 255
+    end
+    color
   end
-
 end
