@@ -1,0 +1,5 @@
+If head is nil, and an element is enqueued, head = tail. Otherwise, head is the oldest item on the list, while tail is the newest.
+
+When dequeuing, the oldest item is set aside, the old head is deleted, and the new head is the next in line, then the list is compacted to shift it left.
+
+If the size of the array is greater then zero, it is not empty.
