@@ -1,0 +1,5 @@
+When pushing things onto the stack, the top is found, the new item is placed their, and top is set to that item.
+
+When popping, the top is found, redunced in posiiton by one. The item on top is set aside, and then top is set to the new position. Then the old top value is returned.
+
+As long as items exist in the array, it is not empty.
