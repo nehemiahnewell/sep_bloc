@@ -1,32 +1,67 @@
 require_relative 'node'
 
-class BinarySearchTree
+class HeapMinTree
   attr_accessor :root
 
-  def initialize(root)
-    @root = root
+  def initialize()
+    @root = nil
   end
 
-  def insert(root, node)
-    if node.rating == root.rating
+  def insert(node)
+    displaced_node = nil
+    if @root.nil?
+      @root = node
+      @root.parent = nil
+      # puts("adding a root")
+      return
+    end
+    if node.rating < @root.rating
+      displaced_node = @root
+      @root = node
+      @root.parent = nil
+      insert(displaced_node)
+      # puts("replacing a root")
+      return
+    end
+    if node.rating == @root.rating
       return "error"
     end
-    if node.rating > root.rating
-      if root.right.nil?
-        root.right = node
-        root.right.parent = root
-        # puts ("inserting: " + node.title)
-      else
-        insert(root.right, node)
+    insert_into_tree(@root, node)
+  end
+
+  def insert_into_tree(root, node)
+    nodes = [root]
+    displaced_node = nil
+    until nodes.empty?
+      if nodes[0].left == nil
+        nodes[0].left = node
+        nodes[0].left.parent = nodes[0]
+        # puts("adding to left")
+      return
+      elsif nodes[0].right == nil
+        nodes[0].right = node
+        nodes[0].right.parent = nodes[0]
+        # puts("adding to right")
+        return
+      elsif nodes[0].left.rating > node.rating
+        displaced_node = adoption_listing(nodes[0].left, [])
+        nodes[0].left = node
+        nodes[0].left.parent = nodes[0]
+        displaced_node.each {|orphan| self.insert(orphan) }
+        # puts("replacing a left")
+        return
+      elsif nodes[0].right.rating > node.rating
+        displaced_node = adoption_listing(nodes[0].right, [])
+        nodes[0].right = node
+        nodes[0].right.parent = nodes[0]
+        displaced_node.each {|orphan| self.insert(orphan) }
+        # puts("replacing a right")
+        return
       end
-    else
-      if root.left.nil?
-        root.left = node
-        root.left.parent = root
-        # puts ("inserting: " + node.title)
-      else
-        insert(root.left, node)
-      end
+      nodes.push(nodes[0].left)
+      nodes.push(nodes[0].right)
+      nodes.shift()
+      # puts("iterating down")
     end
   end
 
@@ -56,7 +91,7 @@ class BinarySearchTree
       deleted_node.parent.right = nil
     end
     orphaned_nodes.shift()
-    orphaned_nodes.each {|orphan| self.insert(deleted_node[1], orphan) }
+    orphaned_nodes.each {|orphan| self.insert(orphan) }
   end
 
   #Gets orphaned nodes

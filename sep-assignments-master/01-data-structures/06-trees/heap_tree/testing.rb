@@ -1,0 +1,37 @@
+require_relative 'heap_min_tree'
+
+matrix = Node.new("The Matrix", 87)
+htree = HeapMinTree.new() 
+pacific_rim = Node.new("Pacific Rim", 72) 
+braveheart = Node.new("Braveheart", 78) 
+jedi = Node.new("Star Wars: Return of the Jedi", 80)
+donnie = Node.new("Donnie Darko", 85)
+inception = Node.new("Inception", 86)
+district = Node.new("District 9", 90)
+shawshank = Node.new("The Shawshank Redemption", 91)
+martian = Node.new("The Martian", 92)
+hope = Node.new("Star Wars: A New Hope", 93)
+empire = Node.new("Star Wars: The Empire Strikes Back", 94)
+mad_max_2 = Node.new("Mad Max 2: The Road Warrior", 98)
+
+htree.insert(matrix)
+htree.insert(pacific_rim)
+htree.insert(braveheart)
+htree.insert(jedi)
+htree.insert(donnie)
+htree.insert(inception)
+htree.insert(district)
+htree.insert(shawshank)
+htree.insert(martian)
+htree.insert(hope)
+htree.insert(empire)
+htree.insert(mad_max_2)
+
+htree.printf()
+
+puts(htree.find(htree.root, matrix.title))
+puts(htree.find(htree.root, pacific_rim.title))
+puts(htree.find(htree.root, braveheart.title))
+puts(htree.find(htree.root, jedi.title))
+
+htree.delete(htree.root, matrix.title)
