@@ -1,0 +1,47 @@
+1.The inserction logic for a compare the difference between your Binary Search Tree and your Heap.
+
+For both, we are given as an assumption that we wont' recieve two items with the same rating, which simplifies the logic in both cases.
+For the binary search tree, we simply ask, 'is this new inserction larger or smaller then the node we're looking at. If smaller go one
+way, if larger go the other. If the way is open, insert there, if the way is taken, repeat.
+For the min tree we instead use the logic, is the item being inserted smaller then the node we're looking at? If yes, displace. If no,
+is there an open place at this 'level' of the tree? If yes, insert there, starting with the left. If no, go down a level and ask the
+same questions about the nodes one level down.
+
+2.
+How much time does an average insertion consume in the Binary Search Tree compared to the Heap? 
+
+100000 causes "stack level too deep error", doing 1000 instead.
+
+user     system      total        real
+Binary Inserction to a thousend nodes
+0.090000   0.000000   0.090000 (  0.090496)
+Heap Inserction to a thousend nodes
+0.130000   0.000000   0.130000 (  0.128733)
+
+Binary inserction for 10001
+0.000000   0.000000   0.000000 (  0.000254)
+Heap inserction for 10001
+0.000000   0.000000   0.000000 (  0.000269)
+
+Binary search for 500
+0.000000   0.000000   0.000000 (  0.000129)
+Heap search for 500
+0.000000   0.000000   0.000000 (  0.000374)
+
+Binary deletion for 10001
+0.000000   0.000000   0.000000 (  0.000242)
+Heap deletion for 10001
+0.000000   0.000000   0.000000 (  0.000316)
+
+When would you use a Binary Search Tree and why?
+Going by these results, I would always use a binary tree, as it has done better on all tests. However in a more abstract sense,
+it's likely to have a deeper stack then a heap tree, so I would use it for smaller data sets. It also tells you more simply by
+where thing appear in the dataset.
+
+As this isn't a perticularly optimised example though, it probably isn't a good idea to generalize. A tree should be better for most
+searches, as the data is already sorted.
+
+When would you use an Heap and why?
+Going by what we see above, you would never choose to use a heap. However my function isn't perticularly optimised. It should be 
+easier to find minimums (top) or maximiums (bottom), though as deleting is a kind of search, and I deleted a maximum, that isn't 
+true in this example.
